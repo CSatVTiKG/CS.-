@@ -1,6 +1,6 @@
 #include "CalculationStudentsScholarship.h"
 
-Fields::Fields() 
+Fields::Fields()
 {
     fullname = "";
 }
@@ -91,7 +91,7 @@ String^ CalculationStudentsScholarship::Calculation()
     case 2: // должник
         // Определить стипендию хорошиста на текущем курсе
         buf = baseRate * 0.7;
-        buf += buf * 0.1 * course; 
+        buf += buf * 0.1 * course;
 
         // 10 % от нее, долг студента
         stipend = buf * 0.1;
@@ -131,13 +131,13 @@ String^ CalculationStudentsScholarship::Calculation()
     // Формирование результата
     if (stipend < 0) {
         stipend = -stipend;
-        result = "Долг студента " + fullname + " за неудовлетворительную успеваемость: " + stipend + " рублей!";
+        result = "Долг " + stipend + " рублей";
     }
     else if (stipend == 0) {
-        result = "Студент " + fullname + " закрыл сессию с тройками, его стипендия составляет: 0 рублей!";
+        result = 0 + " рублей";
     }
     else {
-        result = "Стипендия студента " + fullname + ": " + stipend + " рублей!";
+        result = stipend + " рублей";
     }
 
     return result;

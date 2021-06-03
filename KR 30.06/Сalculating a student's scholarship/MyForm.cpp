@@ -7,11 +7,11 @@ using namespace System::Windows::Forms;
 //точка входа для приложения, для того, чтобы можно было запустить 
 [STAThreadAttribute]
 void main(array<String^>^ args) {
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
+	System::Windows::Forms::Application::EnableVisualStyles();
+	System::Windows::Forms::Application::SetCompatibleTextRenderingDefault(false);
 
 	Сalculatingastudentsscholarship::MyForm form;
-	Application::Run(% form);
+	System::Windows::Forms::Application::Run(% form);
 }
 
 Сalculatingastudentsscholarship::MyForm::MyForm(void)
@@ -19,6 +19,8 @@ void main(array<String^>^ args) {
 	// Инициализация компонентов
 	InitializeComponent();
 	calculationStudentsScholarship = gcnew CalculationStudentsScholarship();
+
+	dataGridView->TopLeftHeaderCell->Value = "№";
 }
 
 System::Void Сalculatingastudentsscholarship::MyForm::buttonCalculate_Click(System::Object^ sender, System::EventArgs^ e)
@@ -84,45 +86,50 @@ System::Void Сalculatingastudentsscholarship::MyForm::buttonCalculate_Click(Syst
 	result = calculationStudentsScholarship->Calculation();
 
 	// Вывод результата
-	MessageBox::Show(result, "Результат!");
+	//MessageBox::Show(result, "Результат!");
+
+	// Добавляем данные в таблицу
+	dataGridView->Rows->Add(fullname, comboBoxCourse->Items[comboBoxCourse->SelectedIndex]->ToString(),
+		comboBoxAcademicPerfomance->Items[comboBoxAcademicPerfomance->SelectedIndex]->ToString(),
+		comboBoxProgress->Items[comboBoxProgress->SelectedIndex]->ToString(), result);
 }
 
 System::Void Сalculatingastudentsscholarship::MyForm::выходToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (MessageBox::Show("Завершить работу?", "Выход!", MessageBoxButtons::YesNo) == Windows::Forms::DialogResult::Yes)
-		Application::Exit();
+	if (MessageBox::Show("Завершить работу?", "Выход!", MessageBoxButtons::YesNo) == System::Windows::Forms::DialogResult::Yes)
+		System::Windows::Forms::Application::Exit();
 }
 
 System::Void Сalculatingastudentsscholarship::MyForm::оПрогрраммеToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	MessageBox::Show("Работу выполнил: студент группы БО921ПРИ Славников Б.В.\nДанные о прогрмамме: программа предназначена для расчета стипендии в ВУЗе","Информация о программе!");
+	MessageBox::Show("Работу выполнил: студент гр.БО921ПРИ Славников Б.В. \nДанные о прогрмамме: программа предназначена для расчета стипендии студентов ВУЗа ","Информация о программе! ");
 }
 
-System::Void Сalculatingastudentsscholarship::MyForm::сохранитьКакXMLToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+
+
+System::Void Сalculatingastudentsscholarship::MyForm::dataGridView_RowsAdded(System::Object^ sender, System::Windows::Forms::DataGridViewRowsAddedEventArgs^ e)
 {
-	try {
-		if (result == "") {
-			MessageBox::Show("Сделайте расчет, после сохранение!","Внимание!");
-			return;
+	for (int i = 0; i < dataGridView->Rows->Count; i++) {
+		dataGridView->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
+	}
+}
+
+System::Void Сalculatingastudentsscholarship::MyForm::сохранитьВEXCELToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Microsoft::Office::Interop::Excel::Application^ ExcelApp = gcnew Microsoft::Office::Interop::Excel::Application();
+	Microsoft::Office::Interop::Excel::Workbook^ ExcelWorkBook;
+	Microsoft::Office::Interop::Excel::Worksheet^ ExcelWorkSheet;
+
+	ExcelWorkBook = ExcelApp->Workbooks->Add(System::Reflection::Missing::Value);
+
+	for (int i = 0; i < dataGridView->Rows->Count; i++)
+	{
+		for (int j = 0; j < dataGridView->ColumnCount; j++)
+		{
+			ExcelApp->Cells[i + 1, j + 1] = dataGridView->Rows[i]->Cells[j]->Value;
 		}
-
-		DataSet^ ds = gcnew DataSet();		// создаем пока что пустой кэш данных
-		DataTable^ dt = gcnew DataTable();	// создаем пока что пустую таблицу данных
-		dt->TableName = "SaveXML";			// название таблицы
-		dt->Columns->Add("Result");			// название колонок
-		ds->Tables->Add(dt);				// в ds создается таблица, с названием и колонками, созданными выше
-
-		DataRow^ row = ds->Tables["SaveXML"]->NewRow(); // создаем новую строку в таблице, занесенной в ds
-		row["Result"] = result;							// в столбец этой строки заносим данные
-		ds->Tables["SaveXML"]->Rows->Add(row);			// добавление всей этой строки в таблицу ds
-
-		ds->WriteXml("..\\Save\\Data.xml");
-		MessageBox::Show("XML файл успешно сохранен!", "Выполнено!");
 	}
-	catch (IOException^ e) {
-		// Если в блоке try возникнет ошибка типа IOException (то есть ввода, вывода)
-		// сработает блок catch, который отловит данную ошибку и выведет ее,
-		// при этом, не завершив работу критической ошибкой
-		MessageBox::Show(e->ToString(), "Ошибка!");
-	}
+
+	ExcelApp->Visible = true;
+	ExcelApp->UserControl = true;
 }

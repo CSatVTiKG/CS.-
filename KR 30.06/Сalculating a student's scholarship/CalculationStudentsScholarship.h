@@ -12,8 +12,8 @@ protected:
 	int progress;
 
 public:
-	Fields(); 
-	String^ GetFullName(); 
+	Fields();
+	String^ GetFullName();
 	void SetFullName(String^ newFullName);
 	int GetCourse();
 	void SetCourse(int newCourse);
@@ -27,11 +27,11 @@ public:
 ref class CalculationStudentsScholarship : Fields
 {
 	// Поля класса
-private: 
+private: // закрытая часть класса
 	float baseRate = 5000;
 
 	// Методы класса
-public: 
+public: // открытая часть класса
 	CalculationStudentsScholarship();								// конструктор по умолчанию - создает пустой объект класса
 	CalculationStudentsScholarship(String^ _fullname, int _course,	// конструктор с параметрами - задает данные объекту класса
 		int _academicPerfomance, int _progress);
@@ -39,7 +39,7 @@ public:
 
 	void SetFiellds(String^ _fullname, int _course,	// задает поля объекта
 		int _academicPerfomance, int _progress);
-	void SetBaseRate(float newBaseRate); //метод для изменения базовой ставки
+	void SetBaseRate(float newBaseRate);
 	String^ Calculation(); // рассчет
 };
 
