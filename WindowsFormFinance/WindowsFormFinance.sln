@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormFinance", "WindowsFormFinance\WindowsFormFinance.csproj", "{3F89FA16-7FF5-4069-8685-160AB5D4C197}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F89FA16-7FF5-4069-8685-160AB5D4C197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F89FA16-7FF5-4069-8685-160AB5D4C197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F89FA16-7FF5-4069-8685-160AB5D4C197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F89FA16-7FF5-4069-8685-160AB5D4C197}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B47DB8CD-1ABA-4A14-84B4-27B7387B2242}
+	EndGlobalSection
+EndGlobal
