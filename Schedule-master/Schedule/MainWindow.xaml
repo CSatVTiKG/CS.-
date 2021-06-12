@@ -1,0 +1,88 @@
+﻿<Window x:Class="Schedule.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Schedule"
+        xmlns:noti="clr-namespace:Schedule.Notifier"
+        mc:Ignorable="d"
+        Title="Расписание" 
+        MinHeight="600" MinWidth="1000"
+        Icon="pack://application:,,,/Resources/Icons/app_icon.png"
+        Closing="Window_Closing">
+    <Grid
+          x:Name="mainGrid"
+          Focusable="True"
+          MouseDown="MainGrid_MouseDown">
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Resources/Icons/background_img.png" 
+                        Opacity="0.7"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                MinWidth="300"
+                Style="{StaticResource RightUnderlinedOuterBorder}">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBox Style="{StaticResource ReadOnlyUnderlinedTextBox}"
+                         TextAlignment="Center"
+                         Text="{Binding DatesRange, Mode=OneWay}"/>
+
+                <ListView Grid.Row="1"
+                          Background="Transparent"
+                          x:Name="notesListView"
+                          ItemsSource="{Binding DisplayedData}"
+                          SelectionChanged="NotesListView_ItemSelected"
+                          BorderThickness="0"
+                          Margin="10,4,4,4"/>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2"
+                Width="Auto"
+                Style="{StaticResource UnderlinedLeftOuterBorder}">
+            <Frame Name="AddNoteFrame"
+                   NavigationUIVisibility="Hidden"/>
+        </Border>
+
+        <Grid Grid.Column="1"
+                  HorizontalAlignment="Center">
+
+            <Button x:Name="AddNewNoteButton"
+                    VerticalAlignment="Top"
+                    Style="{StaticResource AddRoundButton}"
+                    Click="AddNewNoteButton_Click">
+                <Button.RenderTransform>
+                    <TranslateTransform  X="375" Y="125"/>
+                </Button.RenderTransform>
+                <Image Source="pack://application:,,,/Resources/Icons/add_icon.png"/>
+            </Button>
+
+            <Calendar RenderTransformOrigin="0.35 -0.05"
+                      SelectionMode="MultipleRange"
+                      Background="{StaticResource SecondBackgroundBrush}"
+                      BorderBrush="{StaticResource SecondBorderBrush}"
+                      SelectedDatesChanged="Calendar_SelectedDatesChanged">
+                <Calendar.RenderTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </Calendar.RenderTransform>
+            </Calendar>
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>
