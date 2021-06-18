@@ -1,0 +1,42 @@
+﻿<Window x:Class="Kurs.newParameters"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kurs"
+        mc:Ignorable="d"
+        Title="Параметры шара" Height="321.106" Width="532.035" Icon="Set.png" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Baloon.png" Stretch="None"/>
+        </Grid.Background>
+        <Label x:Name="volLabel" Content="Объем шара, м³" HorizontalAlignment="Left" Margin="22,15,0,0" VerticalAlignment="Top" FontFamily="Nexa Script Light" FontSize="30" FontWeight="Bold" Width="227">
+            <Label.Background>
+                <SolidColorBrush Color="White" Opacity="0.4"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="heatLabel" Content="Мощность&#xA;нагревателя, Вт" HorizontalAlignment="Left" Margin="22,66,0,0" VerticalAlignment="Top" FontFamily="Nexa Script Light" FontSize="30" FontWeight="Bold" Width="227">
+            <Label.Background>
+                <SolidColorBrush Color="White" Opacity="0.4"/>
+            </Label.Background>
+        </Label>
+        <Label x:Name="weigLabel" Content="Вес корзины, кг" HorizontalAlignment="Left" Margin="22,153,0,0" VerticalAlignment="Top" FontFamily="Nexa Script Light" FontSize="30" FontWeight="Bold" Width="227">
+            <Label.Background>
+                <SolidColorBrush Color="White" Opacity="0.4"/>
+            </Label.Background>
+        </Label>
+        <Button x:Name="newParam" Content="Применить" HorizontalAlignment="Left" Margin="190,228,0,0" VerticalAlignment="Top" Width="140" Height="53" FontSize="24" FontWeight="Bold" FontFamily="Nexa Script Light" Click="newParam_Click"/>
+        <Slider x:Name="sliderVolume" ToolTip="Минимальный объем - 650, Максимальный объем - 5950" HorizontalAlignment="Left" Margin="296,44,0,0" VerticalAlignment="Top" Width="151" Thumb.DragCompleted="sliderVolume_DragCompleted" Maximum="5950" Minimum="650" LargeChange="10" SmallChange="1"/>
+        <Slider x:Name="sliderHeater" ToolTip="Минимальная мощность - 4000, Максимальная мощность - 6000" HorizontalAlignment="Left" Margin="296,114,0,0" VerticalAlignment="Top" Width="151" Thumb.DragCompleted="sliderHeater_DragCompleted" LargeChange="10" Maximum="6000" Minimum="4000" SmallChange="1"/>
+        <Slider x:Name="sliderWeight" ToolTip="Минимальный вес - 55, Максимальный вес - 85" HorizontalAlignment="Left" Margin="296,175,0,0" VerticalAlignment="Top" Width="151" Thumb.DragCompleted="sliderWeight_DragCompleted" LargeChange="5" Maximum="85" Minimum="55" SmallChange="1"/>
+        <Label x:Name="volData" Content="650" HorizontalAlignment="Left" Margin="356,22,0,0" VerticalAlignment="Top" Height="28" Width="85" Background="{x:Null}" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="heatData" Content="4000" HorizontalAlignment="Left" Margin="352,91,0,0" VerticalAlignment="Top" Height="29" Width="89" Background="{x:Null}" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="weigData" Content="55" HorizontalAlignment="Left" Margin="359,153,0,0" VerticalAlignment="Top" Height="28" Width="82" Background="{x:Null}" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="leftBorderVolume" Content="650" HorizontalAlignment="Left" Margin="258,36,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="rightBorderVolume" Content="5950" HorizontalAlignment="Left" Margin="446,36,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="leftBorderHeater" Content="4000" HorizontalAlignment="Left" Margin="254,107,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="rightBorderHeater" Content="6000" HorizontalAlignment="Left" Margin="446,107,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="leftBorderWeight" Content="55" HorizontalAlignment="Left" Margin="262,170,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+        <Label x:Name="rightBorderWeight" Content="85" HorizontalAlignment="Left" Margin="454,170,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Bodoni Bk BT" FontSize="16"/>
+    </Grid>
+</Window>
